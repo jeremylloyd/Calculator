@@ -34,3 +34,9 @@ Users should be able to:
 
 ### What I learned
 
+- CSS Grid
+  - Use grid over `flex-wrap` when the structure of the interface is more important than the sizing of the elements
+  - In the parent, use `grid-template: repeat(5, 1fr) / repeat(4, 1fr);` to define the size of grids
+  - In the child elements, use `grid-area: [row-start] / [col-start] / [row-end] / [col-end]`, `grid-column: [col-start] / [col-end]` or `grid-row: [row-start] / [row-end]`
+- Colour themes
+  - The BEM convention would require adding a modifier class to every single element, so it's instead easier to use class inheritance [only for this purpose](https://en.bem.info/methodology/css/#nested-selectors). But try to avoid it otherwise
