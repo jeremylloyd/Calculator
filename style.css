@@ -139,7 +139,7 @@ table {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100vh - 50px;
   font-family: "League Spartan";
   background-color: var(--bg);
 }
