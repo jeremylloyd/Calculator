@@ -109,10 +109,34 @@ table {
 
 .theme-2 {
   --bg: var(--lightgrey);
+  --bg-output: var(--lightergrey);
+  --bg-input: var(--greyred);
+  --bg-key: var(--lightgrey);
+  --bg-key-primary: var(--orange);
+  --bg-key-secondary: var(--darkcyan);
+  --shadow-key: var(--darkgreyyellow);
+  --shadow-key-primary: var(--darkorange);
+  --shadow-key-secondary: var(--darkercyan);
+  --text-header: var(--darkergreyyellow);
+  --text-key: var(--darkergreyyellow);
+  --text-key-primary: white;
+  --text-key-secondary: white;
 }
 
 .theme-3 {
   --bg: var(--darkestviolet);
+  --bg-output: var(--darkerviolet);
+  --bg-input: var(--darkerviolet);
+  --bg-key: var(--darkviolet);
+  --bg-key-primary: var(--cyan);
+  --bg-key-secondary: var(--violet);
+  --shadow-key: var(--darkmagenta);
+  --shadow-key-primary: var(--lightcyan);
+  --shadow-key-secondary: var(--magenta);
+  --text-header: var(--yellow);
+  --text-key: var(--yellow);
+  --text-key-primary: var(--blueblack);
+  --text-key-secondary: white;
 }
 
 body {
@@ -139,6 +163,7 @@ body {
   border-radius: 5px;
   box-shadow: 0 4px var(--shadow-key);
   color: var(--text-key);
+  background-color: var(--bg-key);
 }
 
 .calc__button--equals {
