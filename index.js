@@ -1,7 +1,7 @@
 theme = 1;
-input = 0;
-output = 325903000;
-const operators = ["div", "decimal", "plus", "minus", "mul"];
+input = null;
+output = null;
+const operators = ["div", "plus", "minus", "mul"];
 operator = null;
 
 const body = document.querySelector("body");
@@ -12,19 +12,20 @@ const calcOutput = document.querySelector(".calc__output");
 const commaFormatter = Intl.NumberFormat("en");
 const scientificFormatter = Intl.NumberFormat("en", { notation: "scientific" });
 
+updateConsole(output);
+
 themeSwitch.addEventListener("click", toggleTheme);
-document.querySelector(".calc__button--reset").addEventListener("click", reset);
-document
-  .querySelector(".calc__button--del")
-  .addEventListener("click", deleteNumber);
+document.querySelector(".calc__button--reset");
+document.querySelector(".calc__button--del");
 for (i = 0; i < 10; i++) {
   key = document.querySelector(`.calc__button--${i}`);
-  key.addEventListener("click", addNumberToInput);
+  key.number = i;
+  key.addEventListener("click", processNumber);
 }
 for (i = 0; i < operators.length; i++) {
   key = document.querySelector(`.calc__button--${operators[i]}`);
   key.operator = operators[i];
-  key.addEventListener("click", updateOperator);
+  key.addEventListener("click", processOperator);
 }
 
 function toggleTheme() {
@@ -34,41 +35,42 @@ function toggleTheme() {
   themeSwitchSlider.style.transform = `translateX(${24 * (theme - 1)}px)`;
 }
 
-function updateOperator() {
-  operator = this.operator;
-}
-
-function deleteNumber() {
-  if (input !== 0) {
-    removeNumberFromInput();
-  } else {
-    reset();
-  }
-}
-
-function reset() {
-  input = 0;
-  output = 0;
-  updateConsole(output);
-}
-
-function addNumberToInput() {
-  number = Number(this.innerHTML);
-  if (input === 0) {
-    input = number;
-  } else {
-    input = Number(String(input) + String(number));
-  }
-  updateConsole(input);
-}
-
-function removeNumberFromInput() {
-  input = Number(String(input).slice(0, -1));
-  updateConsole(input);
-}
-
 function updateConsole(number) {
   // Print a number to the output screen
   consoleStr = commaFormatter.format(number);
   calcOutput.innerHTML = `${consoleStr}`;
+}
+
+function processNumber() {
+  if (!input) {
+    input = this.number;
+  } else {
+    input = Number(String(input) + String(this.number));
+  }
+  updateConsole(input);
+}
+
+function processOperator() {
+  if (output === null) {
+    output = input;
+  } else if (input !== null) {
+    // Number is added to ensure user can't mess with the input. I'm not sure of the best practice way to check this
+    output = calculate(output, input, operator);
+    updateConsole(output);
+  }
+
+  operator = this.operator;
+  input = null;
+}
+
+function calculate(a, b, op) {
+  if (op === "plus") {
+    return a + b;
+  } else if (op === "minus") {
+    return a - b;
+  } else if (op === "mul") {
+    return a * b;
+  } else if (op === "div") {
+    return a / b;
+  }
 }
