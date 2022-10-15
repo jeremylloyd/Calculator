@@ -27,6 +27,9 @@ for (i = 0; i < operators.length; i++) {
   key.operator = operators[i];
   key.addEventListener("click", processOperator);
 }
+document
+  .querySelector(".calc__button--equals")
+  .addEventListener("click", processEquals);
 
 function toggleTheme() {
   oldTheme = theme;
@@ -42,6 +45,9 @@ function updateConsole(number) {
 }
 
 function processNumber() {
+  if (!operator) {
+    output = null;
+  }
   if (!input) {
     input = this.number;
   } else {
@@ -61,6 +67,19 @@ function processOperator() {
 
   operator = this.operator;
   input = null;
+}
+
+function processEquals() {
+  if (input) {
+    if (operator) {
+      output = calculate(output, input, operator);
+    } else {
+      output = input;
+    }
+    updateConsole(output);
+  }
+  input = null;
+  operator = null;
 }
 
 function calculate(a, b, op) {
