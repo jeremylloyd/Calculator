@@ -125,16 +125,6 @@ function calculate(a, b, op) {
   }
 }
 
-function decimalPlacesCount(number) {
-  const numberStr = String(number);
-  decimalIndex = numberStr.indexOf(".");
-  if (decimalIndex === -1) {
-    return 0;
-  } else {
-    return numberStr.slice(decimalIndex + 1).length;
-  }
-}
-
 function processDelete() {
   if (input) {
     input = Number(String(input).slice(0, -1));
