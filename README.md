@@ -40,3 +40,15 @@ Users should be able to:
   - In the child elements, use `grid-area: [row-start] / [col-start] / [row-end] / [col-end]`, `grid-column: [col-start] / [col-end]` or `grid-row: [row-start] / [row-end]`
 - Colour themes
   - The BEM convention would require adding a modifier class to every single element, so it's instead easier to use class inheritance [only for this purpose](https://en.bem.info/methodology/css/#nested-selectors). But try to avoid it otherwise
+    - Give a "theme-[name]" class to the body
+    - Set the primary theme colours to variables in that class's CSS
+    - Use those variables in the other HTML elements as you normally would
+    - When a new theme is needed, simply adjust the body's class and adjust the primary colours in the new theme
+- JS
+  - The `Number` object type isn't perfect for storing numbers with many decimal places, and it can't safely store integers larger than `2**53-1`. The `BigInt` type can do large integers well (for cryptography, etc.) but can't store floats and can't be added with other `Number` objects.
+  - The following number formatter is pretty good for printing numbers on the screen:
+    ```
+    let commaFormatter = Intl.NumberFormat("en", {
+      maximumFractionDigits: Math.max(15, dp),
+    });
+    ```
